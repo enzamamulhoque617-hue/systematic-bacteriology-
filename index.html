@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Systematic Bacteriology | 3rd Semester</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#f5f7fb;
+    color:#172033;
+}
+
+/* HEADER */
+.hero{
+    min-height:330px;
+    padding:55px 7%;
+    background:linear-gradient(135deg,#111827,#243b64,#315c91);
+    color:white;
+    position:relative;
+    overflow:hidden;
+}
+
+.hero:after{
+    content:"";
+    position:absolute;
+    width:420px;
+    height:420px;
+    border-radius:50%;
+    background:rgba(255,255,255,.08);
+    right:-120px;
+    top:-150px;
+}
+
+.badge{
+    display:inline-block;
+    padding:8px 14px;
+    border:1px solid rgba(255,255,255,.25);
+    border-radius:30px;
+    background:rgba(255,255,255,.1);
+    font-size:13px;
+    margin-bottom:22px;
+}
+
+.hero h1{
+    font-size:clamp(35px,6vw,68px);
+    line-height:1.05;
+    max-width:850px;
+    margin-bottom:18px;
+}
+
+.hero p{
+    color:#dbeafe;
+    font-size:18px;
+    max-width:650px;
+    line-height:1.6;
+}
+
+/* SEARCH */
+.search-area{
+    max-width:1100px;
+    margin:-35px auto 40px;
+    padding:0 20px;
+    position:relative;
+    z-index:5;
+}
+
+.search-box{
+    background:white;
+    padding:18px;
+    border-radius:20px;
+    box-shadow:0 15px 45px rgba(15,23,42,.12);
+}
+
+.search-box input{
+    width:100%;
+    border:0;
+    outline:0;
+    font-size:16px;
+    padding:12px;
+}
+
+/* MAIN */
+.container{
+    width:min(1150px,92%);
+    margin:auto;
+}
+
+.section-title{
+    margin-bottom:22px;
+}
+
+.section-title h2{
+    font-size:30px;
+    margin-bottom:8px;
+}
+
+.section-title p{
+    color:#667085;
+}
+
+/* FILTERS */
+.filters{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-bottom:30px;
+}
+
+.filter{
+    border:0;
+    background:white;
+    padding:11px 18px;
+    border-radius:30px;
+    cursor:pointer;
+    color:#475467;
+    box-shadow:0 4px 15px rgba(0,0,0,.06);
+    transition:.2s;
+}
+
+.filter:hover,
+.filter.active{
+    background:#1d4ed8;
+    color:white;
+}
+
+/* UNIT CARDS */
+.units{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:22px;
+}
+
+.unit{
+    background:white;
+    border-radius:24px;
+    padding:26px;
+    border:1px solid #e8edf5;
+    box-shadow:0 8px 25px rgba(15,23,42,.06);
+    transition:.25s;
+}
+
+.unit:hover{
+    transform:translateY(-5px);
+    box-shadow:0 18px 40px rgba(15,23,42,.11);
+}
+
+.unit-number{
+    font-size:13px;
+    font-weight:bold;
+    color:#2563eb;
+    letter-spacing:1px;
+    margin-bottom:10px;
+}
+
+.unit h3{
+    font-size:23px;
+    margin-bottom:10px;
+}
+
+.marks{
+    display:inline-block;
+    background:#eff6ff;
+    color:#1d4ed8;
+    padding:6px 10px;
+    border-radius:20px;
+    font-size:12px;
+    margin-bottom:18px;
+}
+
+.topics{
+    list-style:none;
+}
+
+.topics li{
+    padding:10px 0;
+    border-top:1px solid #eef1f6;
+    color:#475467;
+    font-size:15px;
+}
+
+/* CREDIT */
+.credit{
+    margin:70px auto 35px;
+    padding:32px;
+    border-radius:28px;
+    background:linear-gradient(135deg,#111827,#1e3a5f);
+    color:white;
+    text-align:center;
+    box-shadow:0 20px 45px rgba(15,23,42,.16);
+}
+
+.credit .small{
+    color:#93c5fd;
+    font-size:12px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    margin-bottom:12px;
+}
+
+.credit h3{
+    font-size:24px;
+    margin-bottom:12px;
+}
+
+.credit p{
+    color:#dbeafe;
+    line-height:1.8;
+}
+
+/* FOOTER */
+footer{
+    text-align:center;
+    color:#98a2b3;
+    font-size:13px;
+    padding:0 20px 30px;
+}
+
+/* MOBILE */
+@media(max-width:600px){
+    .hero{
+        padding:40px 6%;
+    }
+
+    .hero p{
+        font-size:15px;
+    }
+
+    .unit{
+        padding:22px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header class="hero">
+
+    <div class="badge">
+        🧫 3rd Semester • ML&MDT
+    </div>
+
+    <h1>Systematic<br>Bacteriology</h1>
+
+    <p>
+        An interactive study hub for understanding bacteria,
+        laboratory diagnosis, diseases and microscopy.
+    </p>
+
+</header>
+
+
+<div class="search-area">
+
+    <div class="search-box">
+
+        <input
+            type="text"
+            id="search"
+            placeholder="🔎 Search bacteria, unit or microscope..."
+            onkeyup="searchTopics()"
+        >
+
+    </div>
+
+</div>
+
+
+<main class="container">
+
+    <div class="section-title">
+
+        <h2>Course Units</h2>
+
+        <p>
+            Select a unit to explore the syllabus topics.
+        </p>
+
+    </div>
+
+
+    <div class="filters">
+
+        <button class="filter active" onclick="filterUnits('all',this)">
+            All
+        </button>
+
+        <button class="filter" onclick="filterUnits('unit1',this)">
+            Unit I
+        </button>
+
+        <button class="filter" onclick="filterUnits('unit2',this)">
+            Unit II
+        </button>
+
+        <button class="filter" onclick="filterUnits('unit3',this)">
+            Unit III
+        </button>
+
+        <button class="filter" onclick="filterUnits('unit4',this)">
+            Unit IV
+        </button>
+
+        <button class="filter" onclick="filterUnits('unit5',this)">
+            Unit V
+        </button>
+
+    </div>
+
+
+    <section class="units" id="units">
+
+
+        <!-- UNIT I -->
+
+        <article class="unit" data-unit="unit1">
+
+            <div class="unit-number">UNIT I</div>
+
+            <h3>Gram-Positive & Gram-Negative Cocci</h3>
+
+            <span class="marks">10 Marks</span>
+
+            <ul class="topics">
+
+                <li>🦠 Staphylococci</li>
+
+                <li>🦠 Pneumococci</li>
+
+                <li>🦠 Streptococci</li>
+
+                <li>🦠 N. gonorrhoeae</li>
+
+                <li>🦠 N. meningitidis</li>
+
+            </ul>
+
+        </article>
+
+
+        <!-- UNIT II -->
+
+        <article class="unit" data-unit="unit2">
+
+            <div class="unit-number">UNIT II</div>
+
+            <h3>Gram-Positive Bacilli</h3>
+
+            <span class="marks">15 Marks</span>
+
+            <ul class="topics">
+
+                <li>🧫 Corynebacteria</li>
+
+                <li>🧫 Mycobacteria</li>
+
+                <li>🧫 Clostridia</li>
+
+                <li>🧫 Actinomyces</li>
+
+                <li>🧫 Bacillus</li>
+
+            </ul>
+
+        </article>
+
+
+        <!-- UNIT III -->
+
+        <article class="unit" data-unit="unit3">
+
+            <div class="unit-number">UNIT III</div>
+
+            <h3>Gram-Negative Bacilli</h3>
+
+            <span class="marks">10 Marks</span>
+
+            <ul class="topics">
+
+                <li>🧬 Enterobacteriaceae</li>
+
+                <li>🧬 Pseudomonas</li>
+
+                <li>🧬 Vibrio</li>
+
+                <li>🧬 Brucella</li>
+
+                <li>🧬 Bordetella</li>
+
+                <li>🧬 Haemophilus</li>
+
+            </ul>
+
+        </article>
+
+
+        <!-- UNIT IV -->
+
+        <article class="unit" data-unit="unit4">
+
+            <div class="unit-number">UNIT IV</div>
+
+            <h3>Miscellaneous Bacteria</h3>
+
+            <span class="marks">15 Marks</span>
+
+            <ul class="topics">
+
+                <li>🌀 Treponema</li>
+
+                <li>🌀 Leptospira</li>
+
+            </ul>
+
+        </article>
+
+
+        <!-- UNIT V -->
+
+        <article class="unit" data-unit="unit5">
+
+            <div class="unit-number">UNIT V</div>
+
+            <h3>Microscopy</h3>
+
+            <span class="marks">15 Marks</span>
+
+            <ul class="topics">
+
+                <li>🔬 Bright Field Microscope</li>
+
+                <li>🔬 Dark Field Microscope</li>
+
+                <li>🔬 Phase Contrast Microscope</li>
+
+                <li>🔬 Polarised Microscope</li>
+
+                <li>🔬 Fluorescence Microscope</li>
+
+                <li>🔬 Scanning Electron Microscope (SEM)</li>
+
+                <li>🔬 Transmission Electron Microscope (TEM)</li>
+
+            </ul>
+
+        </article>
+
+
+    </section>
+
+
+    <!-- PREMIUM CREDIT -->
+
+    <section class="credit">
+
+        <div class="small">
+            Academic Study Resource
+        </div>
+
+        <h3>Created & Designed by Enzamamul Hoque</h3>
+
+        <p>
+            Student, Mangaldai College<br>
+            Department: ML&MDT<br>
+            <strong>Source: Diksha Ma’am</strong>
+        </p>
+
+    </section>
+
+</main>
+
+
+<footer>
+    Systematic Bacteriology • 3rd Semester • ML&MDT
+</footer>
+
+
+<script>
+
+function filterUnits(unit,button){
+
+    document.querySelectorAll(".filter")
+        .forEach(btn => btn.classList.remove("active"));
+
+    button.classList.add("active");
+
+    document.querySelectorAll(".unit")
+        .forEach(card => {
+
+            if(unit === "all"){
+                card.style.display = "block";
+            }
+
+            else if(card.dataset.unit === unit){
+                card.style.display = "block";
+            }
+
+            else{
+                card.style.display = "none";
+            }
+
+        });
+
+}
+
+
+function searchTopics(){
+
+    const search =
+        document.getElementById("search")
+        .value
+        .toLowerCase();
+
+    document.querySelectorAll(".unit")
+        .forEach(card => {
+
+            const text =
+                card.innerText.toLowerCase();
+
+            if(text.includes(search)){
+                card.style.display = "block";
+            }
+
+            else{
+                card.style.display = "none";
+            }
+
+        });
+
+}
+
+</script>
+
+</body>
+</html>
